@@ -100,6 +100,10 @@ ul {
   max-width: 600px;
 }
 
+.section-subtitle.wide {
+  max-width: none;
+}
+
 .stat-card {
   background: var(--bg-card);
   padding: 15px;
