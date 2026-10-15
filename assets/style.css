@@ -1,0 +1,667 @@
+/* ══════════════════════════════════════════════════════════════
+   CERTS.GH0ST4N.MY.ID — STYLESHEET
+   ──────────────────────────────────────────────────────────────
+   DAFTAR ISI:
+   01. Variabel & Reset ......... warna, font, reset dasar
+   02. Utilities ................ container, komponen umum
+   03. Navbar ................... fixed nav + hamburger
+   04. Page Hero ................ judul, typewriter, statistik
+   05. Animasi .................. keyframes + fade-in-up
+   06. Filter Issuer ............ tombol [ semua ] [ itbox ] ...
+   07. Kartu Sertifikat ......... grid + kartu
+   08. Lightbox ................. modal gambar/PDF sertifikat
+   09. Footer
+   10. Responsive ............... mobile / aksesibilitas
+
+   CATATAN DEVELOPMENT:
+   - Tema disalin dari situs utama (gh0st4n.my.id) biar satu
+     keluarga. Ganti tema → edit :root di KEDUANYA.
+   ══════════════════════════════════════════════════════════════ */
+
+/* ─────────────── 01. VARIABEL & RESET ─────────────── */
+:root {
+  /* Palette warna — sinkron dgn situs utama & blog */
+  --bg-main: #0a0a0f;
+  --bg-card: #10101a;
+  --bg-accent: #14141f;
+  --primary: #7c3aed;
+  --secondary: #a855f7;
+  --accent-cyan: #22d3ee;
+
+  --text-main: #f1f5f9;
+  --text-muted: #94a3b8;
+
+  --border: #1e1e2e;
+  --glow: rgba(124, 58, 237, 0.15);
+
+  --font-heading: "JetBrains Mono", monospace;
+  --font-body: "Inter", sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-main);
+  color: var(--text-main);
+  font-family: var(--font-body);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.3s ease;
+}
+
+ul {
+  list-style: none;
+}
+
+/* ─────────────── 02. UTILITIES ─────────────── */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.section-padding {
+  padding: 80px 0;
+}
+
+.mono {
+  font-family: var(--font-heading);
+}
+
+.section-header {
+  margin-bottom: 50px;
+}
+
+.section-title {
+  font-family: var(--font-heading);
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  color: var(--primary);
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.section-subtitle {
+  color: var(--text-muted);
+  max-width: 600px;
+}
+
+.stat-card {
+  background: var(--bg-card);
+  padding: 15px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  text-align: center;
+}
+
+.stat-value {
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+  color: var(--accent-cyan);
+  display: block;
+  margin-bottom: 5px;
+}
+
+.stat-label {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+/* link [ View ] / [ Verify ] di kartu sertifikat */
+.project-link {
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  color: var(--text-main);
+  position: relative;
+}
+
+.project-link:hover {
+  color: var(--secondary);
+}
+
+/* ─────────────── 03. NAVBAR ─────────────── */
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  background: rgba(10, 10, 15, 0.9);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 15px 0;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.nav-links {
+  display: flex;
+  gap: 30px;
+}
+
+.nav-links a {
+  font-family: var(--font-heading);
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  position: relative;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  color: var(--text-main);
+}
+
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--accent-cyan);
+  transition: width 0.3s;
+}
+
+.nav-links a:hover::after,
+.nav-links a.active::after {
+  width: 100%;
+}
+
+.hamburger {
+  display: none;
+  cursor: pointer;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.hamburger span {
+  width: 25px;
+  height: 3px;
+  background: var(--text-main);
+  border-radius: 2px;
+  transition: 0.3s;
+}
+
+/* ─────────────── 04. PAGE HERO ───────────────
+   Hero versi pendek (bukan 100vh) — halaman ini isinya
+   memang cuma satu section, jadi konten langsung keliatan. */
+.page-hero {
+  min-height: 46vh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 110px 0 50px; /* offset navbar fixed di atas */
+}
+
+#particles-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+.scanline-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    transparent 50%,
+    rgba(10, 10, 15, 0.5) 51%
+  );
+  background-size: 100% 4px;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.hero-content {
+  text-align: center;
+  z-index: 1;
+  padding: 0 15px;
+  width: 100%;
+}
+
+.hero-greeting {
+  font-family: var(--font-heading);
+  color: var(--accent-cyan);
+  font-size: 1rem;
+  margin-bottom: 10px;
+}
+
+.page-title {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 6vw, 3.2rem);
+  font-weight: 700;
+  line-height: 1.15;
+  margin-bottom: 15px;
+  background: linear-gradient(to right, #fff, #94a3b8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.page-tagline {
+  font-size: clamp(0.85rem, 2vw, 1rem);
+  color: var(--text-muted);
+  margin-bottom: 30px;
+  min-height: 1.6em;
+}
+
+.cursor {
+  display: inline-block;
+  width: 8px;
+  background-color: var(--accent-cyan);
+  animation: blink 1s infinite;
+}
+
+/* auto-fit → 3 kolom di desktop, menyusut rapi di HP */
+.hero-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 12px;
+  max-width: 580px;
+  margin: 0 auto;
+}
+
+/* ─────────────── 05. ANIMASI ─────────────── */
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+.fade-in-up {
+  opacity: 0;
+  transform: translateY(30px);
+  transition:
+    opacity 0.6s ease-out,
+    transform 0.6s ease-out;
+}
+
+.fade-in-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ─────────────── 06. FILTER ISSUER ─────────────── */
+.cert-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
+/* tombol [ semua ] [ itbox ] ... — dibuat JS */
+.filter-btn {
+  font-family: var(--font-heading);
+  font-size: 0.8rem;
+  padding: 6px 14px;
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.filter-btn:hover {
+  border-color: var(--secondary);
+  color: var(--text-main);
+  box-shadow: 0 0 10px var(--glow);
+}
+
+.filter-btn.active {
+  border-color: var(--accent-cyan);
+  color: var(--accent-cyan);
+  background: rgba(34, 211, 238, 0.1);
+}
+
+.filter-btn.is-type.active {
+  border-color: var(--secondary);
+  color: var(--secondary);
+  background: rgba(124, 58, 237, 0.15);
+}
+
+.empty-note {
+  text-align: center;
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  padding: 30px 0;
+}
+
+/* ─────────────── 07. KARTU SERTIFIKAT ───────────────
+   GRID → FLEXBOX + justify-content: center.
+   Alasan: CSS grid selalu menempelkan sisa kartu di baris
+   terakhir ke KIRI. Flexbox + center = baris terakhir yang
+   gak full otomatis di tengah:
+     1 kartu → di tengah sendirian • 2 kartu → berdua di tengah
+
+   Cara kerja lebar kartu:
+   - flex-basis 300px → di bawah itu kartu pindah ke baris baru
+     (pengganti minmax(300px, 1fr) di grid lama)
+   - flex-grow 1      → kartu melebar mengisi barisnya
+   - max-width 366px  ≈ (container 1160px − 2×30px gap) / 3
+     → batas atas 3 kolom, sekaligus bikin kartu di baris
+       terakhir ukurannya SAMA dengan kartu baris penuh
+       (gak gendut sendiri) */
+.certs-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* <-- kunci: sisa kartu jadi di tengah */
+  gap: 30px;
+}
+
+.cert-card {
+  flex: 1 1 300px;
+  max-width: 366px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 25px;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.cert-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--primary);
+  box-shadow: 0 10px 30px -10px var(--glow);
+}
+
+/* filter: kartu disembunyikan via JS (toggle class ini)
+   display:none tetap aman di flex — item-nya dianggap gak ada */
+.cert-card.is-hidden {
+  display: none;
+}
+
+/* badge tipe sertifikat: [ COURSE ] ungu • [ WEBINAR ] cyan */
+.cert-badge {
+  font-family: var(--font-heading);
+  font-size: 0.7rem;
+  background: rgba(124, 58, 237, 0.2);
+  color: var(--secondary);
+  padding: 4px 8px;
+  border-radius: 4px;
+  display: inline-block;
+  margin-bottom: 15px;
+  width: fit-content;
+}
+
+.cert-badge.is-webinar {
+  background: rgba(34, 211, 238, 0.1);
+  color: var(--accent-cyan);
+}
+
+.cert-icon {
+  width: 55px;
+  height: 55px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(124, 58, 237, 0.15);
+  border: 1px solid var(--primary);
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.cert-icon i {
+  font-size: 1.6rem;
+  color: var(--secondary);
+}
+
+.cert-issuer {
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  color: var(--accent-cyan);
+  display: block;
+  margin-bottom: 8px;
+}
+
+.cert-title {
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  color: var(--text-main);
+}
+
+/* flex-grow: biar blok link selalu sejajar di dasar kartu */
+.cert-desc {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  margin-bottom: 20px;
+  flex-grow: 1;
+}
+
+.cert-meta {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  border-top: 1px solid var(--border);
+  padding-top: 15px;
+  margin-bottom: 15px;
+}
+
+.cert-meta i {
+  color: var(--primary);
+  margin-right: 4px;
+  vertical-align: middle;
+}
+
+.cert-links {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+/* ─────────────── 08. LIGHTBOX ───────────────
+   Modal sertifikat full-screen (dipindah dari situs utama).
+   Elemen <div class="lightbox"> dibuat lewat JS. */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 3000;
+  background: rgba(10, 10, 15, 0.92);
+  backdrop-filter: blur(8px);
+  display: flex;
+  overflow: auto;
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.3s ease,
+    visibility 0.3s ease;
+}
+
+.lightbox.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* margin:auto = center + tetap bisa discroll saat zoom */
+.lightbox-content {
+  margin: auto;
+}
+
+.lightbox-img {
+  display: block;
+  max-width: min(92vw, 1000px);
+  max-height: 80vh;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+  cursor: zoom-in;
+}
+
+/* mode zoom: gambar ukuran asli, bisa discroll keliling */
+.lightbox.zoomed .lightbox-img {
+  max-width: none;
+  max-height: none;
+  cursor: zoom-out;
+}
+
+/* khusus file PDF (auto-detect dari ekstensi) */
+.lightbox-iframe {
+  width: min(92vw, 900px);
+  height: 80vh;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+.lightbox-close {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 3100;
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-main);
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  padding: 8px 14px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.lightbox-close:hover {
+  border-color: var(--accent-cyan);
+  color: var(--accent-cyan);
+}
+
+.lightbox-caption {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-heading);
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+  max-width: 92vw;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.lightbox-error {
+  font-family: var(--font-heading);
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+/* ─────────────── 09. FOOTER ─────────────── */
+footer {
+  padding: 40px 0;
+  background-color: var(--bg-main);
+  border-top: 1px solid var(--border);
+  text-align: center;
+}
+
+.footer-text {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  margin-bottom: 5px;
+}
+
+.footer-sub {
+  color: var(--primary);
+  font-family: var(--font-heading);
+  font-size: 0.8rem;
+}
+
+/* link antar situs saudara di footer */
+.footer-sub a:hover {
+  color: var(--accent-cyan);
+}
+
+/* ─────────────── 10. RESPONSIVE ─────────────── */
+@media (max-width: 768px) {
+  .nav-links {
+    position: absolute;
+    top: 60px;
+    right: 0;
+    width: 100%;
+    background: var(--bg-card);
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--border);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+    transform: translateY(-150%);
+    transition: transform 0.3s ease;
+    z-index: 999;
+  }
+
+  .nav-links.active {
+    transform: translateY(0);
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  .page-hero {
+    padding: 100px 0 40px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0 15px;
+  }
+
+  .cert-card {
+    padding: 20px;
+  }
+}
+
+/* Aksesibilitas */
+@media (prefers-reduced-motion: reduce) {
+  .fade-in-up {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .cursor {
+    animation: none;
+  }
+}

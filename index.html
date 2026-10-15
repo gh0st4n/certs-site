@@ -1,0 +1,152 @@
+<!doctype html>
+<!--
+  ════════════════════════════════════════════════════════════════
+  CERTIFICATES — certs.gh0st4n.my.id
+  ────────────────────────────────────────────────────────────────
+  Situs saudara dari portofolio utama (gh0st4n.my.id).
+  Tema sama persis → kalau ganti tema, sinkronkan :root
+  di style.css situs ini + situs utama + blog.
+
+  CARA MENAMBAH SERTIFIKAT:
+  1. Taruh file di assets/certificates/ (WebP/PNG/PDF, ≤500KB)
+     — nama file huruf kecil semua, tanpa spasi (case-sensitive!)
+  2. Duplikat satu blok <div class="cert-card"> di bawah
+  3. Isi: data-issuer, ikon (https://phosphoricons.com), issuer,
+     judul, deskripsi, tanggal, ID, href [View] (file lokal) &
+     [Verify] (halaman verifikasi issuer, kalau ada)
+  4. Selesai — tombol filter issuer & statistik di hero nambah
+     OTOMATIS (dibaca JS dari data-issuer)
+  5. [ View ] auto-pakai lightbox; file .pdf otomatis dirender
+     via iframe — tinggal ganti href
+  ════════════════════════════════════════════════════════════════
+-->
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Certificates • Gh0sT4n</title>
+    <meta
+      name="description"
+      content="Kumpulan sertifikat & pelatihan Gh0sT4n — semua dokumen bisa dilihat dan diverifikasi langsung ke issuer." />
+    <link rel="icon" type="image/png" href="assets/icons/Gh0sT4n.png" />
+    <meta property="og:site_name" content="Gh0sT4n Certificates" />
+    <meta property="og:title" content="Certificates • Gh0sT4n" />
+    <meta
+      property="og:description"
+      content="Kumpulan sertifikat & pelatihan Gh0sT4n — Cyber Security Track." />
+
+    <!-- Font & ikon: sama dgn situs utama -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono:wght@400;700&display=swap"
+      rel="stylesheet" />
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <link rel="stylesheet" href="assets/style.css" />
+  </head>
+
+  <body>
+    <!-- ══════════════════ NAVBAR ══════════════════
+         Logo & link "Portfolio" balik ke situs utama -->
+    <header>
+      <div class="container">
+        <nav>
+          <a class="logo" href="https://gh0st4n.my.id">Gh0sT4n</a>
+          <div class="nav-links" id="navLinks">
+            <a href="https://gh0st4n.my.id">Portfolio</a>
+            <a href="#certificates" class="active">Certs</a>
+            <a href="https://blog.gh0st4n.my.id">Blog</a>
+          </div>
+          <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <!-- ══════════════════ HERO ══════════════════ -->
+      <section class="page-hero">
+        <canvas id="particles-canvas"></canvas>
+        <div class="scanline-overlay"></div>
+
+        <div class="hero-content fade-in-up">
+          <div class="hero-greeting">&gt; ls ~/certificates --sort=date</div>
+          <h1 class="page-title">// Certificates</h1>
+
+          <!-- tagline diketik otomatis (script.js: initTypewriter) -->
+          <p class="page-tagline mono">
+            <span id="typewriter"></span><span class="cursor">|</span>
+          </p>
+
+          <!-- statistik: angka diisi otomatis oleh JS
+               (dihitung dari jumlah .cert-card & data-issuer) -->
+          <div class="hero-stats">
+            <div class="stat-card">
+              <span class="stat-value" id="statTotal">–</span>
+              <span class="stat-label">Total Sertifikat</span>
+            </div>
+            <div class="stat-card">
+              <span class="stat-value" id="statIssuers">–</span>
+              <span class="stat-label">Issuer</span>
+            </div>
+            <div class="stat-card">
+              <span class="stat-value">Cyber Sec</span>
+              <span class="stat-label">Track Fokus</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══════════════════ DAFTAR SERTIFIKAT ══════════════════ -->
+      <section id="certificates" class="section-padding">
+        <div class="container">
+          <div class="section-header fade-in-up">
+            <h2 class="section-title">// Semua Sertifikat</h2>
+            <p class="section-subtitle">
+              Dokumen asli bisa dilihat via [ View ] & diverifikasi langsung ke
+              issuer via [ Verify ].
+            </p>
+          </div>
+
+          <!-- tombol filter dibuat otomatis oleh JS dari data-issuer -->
+          <div class="cert-filters" id="certFilters"></div>
+
+          <!-- kartu sertifikat DIRENDER JS dari assets/certs-data.js
+          (array CERTS) — jangan tulis kartu manual di sini lagi -->
+          <div class="certs-grid" id="certsGrid">
+            <noscript>
+              <p class="empty-note mono">
+                [ JavaScript mati — daftar sertifikat gak bisa dirender ]
+              </p>
+            </noscript>
+          </div>
+
+          <!-- muncul kalau filter gak nemu apa-apa -->
+          <p class="empty-note mono" id="certEmpty" hidden>
+            [ tidak ada sertifikat pada filter ini ]
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <!-- ══════════════════ FOOTER ══════════════════ -->
+    <footer>
+      <div class="container">
+        <p class="footer-text">© 2026 Gh0sT4n • Muhammad Luthfi Fakhmar</p>
+        <p class="footer-sub mono">
+          <a href="https://gh0st4n.my.id">gh0st4n.my.id</a> •
+          <a href="https://blog.gh0st4n.my.id">blog.gh0st4n.my.id</a>
+        </p>
+      </div>
+    </footer>
+
+    <!-- data sertifikat → nambah sertifikat = edit file ini -->
+    <script src="assets/certs-data.js"></script>
+    <script src="assets/script.js"></script>
+  </body>
+</html>
