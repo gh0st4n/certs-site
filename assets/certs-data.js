@@ -48,7 +48,7 @@ const CERTS = [
     desc: "Pengenalan ethical hacking, dasar jaringan untuk keamanan, dan teknik hacking web application.",
     date: "11 May 2025",
     certId: "13EF9F429-13F27454E-12D455369",
-    view: "assets/certs-site/ITBox/ITBOX-Sec-Basic.html",
+    view: "assets/certificates/ITBox/ITBOX_CyberSecurity-Basic.webp",
     verify:
       "https://itbox.id/certificate-verifier/13EF9F429-13F27454E-12D455369",
   },
@@ -60,7 +60,7 @@ const CERTS = [
     desc: "Pemrograman untuk security, web application security dan linux exploitation development - memahami alur serangan serta mitigasinya.",
     date: "23 August 2026",
     certId: "13EF9F429-13F17DB9E-12D455369",
-    view: "assets/certs-site/ITBox/ITBOX-Sec-intermediate.html",
+    view: "assets/certificates/ITBox/ITBOX_CyberSecurity-Intermediate.webp",
     verify:
       "https://itbox.id/certificate-verifier/13EF9F429-13F17DB9E-12D455369",
   },
@@ -72,7 +72,7 @@ const CERTS = [
     desc: "Linux Return Oriented Programming (ROP) & Windows Exploit Development - jantungnya low-level security.",
     date: "5 October 2026",
     certId: "13EF9F429-13F18011D-12D455369",
-    view: "assets/certs-site/ITBox/ITBox-Sec-Advanced.html",
+    view: "assets/certificates/ITBox/ITBOX_CyberSecurity-Advanced.webp",
     verify:
       "https://itbox.id/certificate-verifier/13EF9F429-13F18011D-12D455369",
   },
@@ -84,7 +84,7 @@ const CERTS = [
     desc: "Partisipasi webinar cyber security - studi kasus peretasan: membongkar serangan social engineering modern hingga memperoleh akses shell.",
     date: "10 October 2026",
     certId: "HRI-WBNR-10_OKT-2026",
-    view: "assets/certs-site/HackerRoom/Soceng-KakAmanda.html",
+    view: "assets/certificates/HackerRoom/HKR-WBNR-10_OKT-2026.webp",
     // belum ada halaman verifikasi resmi → tanpa [ Verify ]
   },
   {
@@ -95,7 +95,7 @@ const CERTS = [
     desc: "Certificate of Appreciation atas partisipasi sebagai peserta sharing session bagaimana membangun offensive security tools.",
     date: "11 October 2026",
     certId: "MS-WBNR1002-2026-078",
-    view: "assets/certs-site/MerdekaSiber/Build-Tools.html",
+    view: "assets/certificates/Merdeka-Siber/MS-WBNR1002-2026-078.webp",
     verify: "https://merdekasiber.com/certificate/MS-WBNR1002-2026-078",
   },
 ];
