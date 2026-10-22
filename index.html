@@ -18,6 +18,10 @@
      OTOMATIS (dibaca JS dari data-issuer)
   5. [ View ] auto-pakai lightbox; file .pdf otomatis dirender
      via iframe — tinggal ganti href
+
+  FIX SEO (2026-10-23): head dilengkapi meta lengkap (robots, canonical,
+  keywords, Open Graph, Twitter Card, theme-color) + JSON-LD @graph
+  Person/WebSite/Organization dgn @id konsisten ke ekosistem T4n Labs.
   ════════════════════════════════════════════════════════════════
 -->
 <html lang="id">
@@ -25,16 +29,102 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>Certificates • Gh0sT4n</title>
+    <!-- ═══════════ IDENTITAS & SEO ═══════════
+         FIX SEO: title 55 kar, description 155 kar, robots, canonical,
+         keywords, author, theme-color, Open Graph & Twitter Card
+         lengkap, JSON-LD @graph Person + WebSite + Organization
+         (@id konsisten dgn situs utama & ekosistem T4n Labs). -->
+    <title>Sertifikat dan Pelatihan Gh0sT4n | Cyber Security Track</title>
     <meta
       name="description"
-      content="Kumpulan sertifikat & pelatihan Gh0sT4n — semua dokumen bisa dilihat dan diverifikasi langsung ke issuer." />
-    <link rel="icon" type="image/png" href="assets/icons/Gh0sT4n.png" />
-    <meta property="og:site_name" content="Gh0sT4n Certificates" />
-    <meta property="og:title" content="Certificates • Gh0sT4n" />
+      content="Kumpulan sertifikat dan pelatihan Gh0sT4n (Muhammad Luthfi Fakhmar) — dokumen asli bisa dilihat langsung dan diverifikasi ke issuer. Fokus: Cyber Security." />
+    <meta name="author" content="Gh0sT4n (Muhammad Luthfi Fakhmar)" />
     <meta
-      property="og:description"
-      content="Kumpulan sertifikat & pelatihan Gh0sT4n — Cyber Security Track." />
+      name="keywords"
+      content="sertifikat Gh0sT4n, certificate, pelatihan, cyber security, security training, Muhammad Luthfi Fakhmar, T4n Labs, vulnerability researcher, Indonesia" />
+    <!-- Crawling: indeks penuh + preview gambar besar di hasil pencarian -->
+    <meta
+      name="robots"
+      content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <!-- Canonical: cegah duplikasi *.github.io vs subdomain custom -->
+    <link rel="canonical" href="https://certs.gh0st4n.my.id/" />
+    <!-- Warna address bar browser mobile (sesuaikan bila tema berubah) -->
+    <meta name="theme-color" content="#0a0a0a" />
+    <link rel="icon" type="image/png" href="assets/icons/Gh0sT4n.png" />
+
+    <!-- ===== OPEN GRAPH: preview share WA/Discord/FB (locale ID) ===== -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Gh0sT4n Certificates" />
+    <meta property="og:title" content="Sertifikat dan Pelatihan Gh0sT4n | Cyber Security Track" />
+    <meta property="og:description" content="Kumpulan sertifikat dan pelatihan Gh0sT4n (Muhammad Luthfi Fakhmar) — dokumen asli bisa dilihat langsung dan diverifikasi ke issuer. Fokus: Cyber Security." />
+    <meta property="og:url" content="https://certs.gh0st4n.my.id/" />
+    <meta property="og:image" content="https://certs.gh0st4n.my.id/assets/icons/Gh0sT4n.png" />
+    <meta property="og:image:alt" content="Avatar Gh0sT4n" />
+    <meta property="og:locale" content="id_ID" />
+
+    <!-- ===== TWITTER CARD ===== -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Sertifikat dan Pelatihan Gh0sT4n | Cyber Security Track" />
+    <meta name="twitter:description" content="Kumpulan sertifikat dan pelatihan Gh0sT4n (Muhammad Luthfi Fakhmar) — dokumen asli bisa dilihat langsung dan diverifikasi ke issuer. Fokus: Cyber Security." />
+    <meta name="twitter:image" content="https://certs.gh0st4n.my.id/assets/icons/Gh0sT4n.png" />
+
+    <!-- ===== STRUCTURED DATA (schema.org JSON-LD) =====
+         Person & Organization memakai @id yang SAMA dgn situs utama
+         (gh0st4n.my.id) dan situs T4n Labs agar entitas Google saling
+         tergabung lintas-domain. SearchAction tidak dipasang: situs ini
+         hanya daftar statis + filter issuer, tanpa kolom pencarian. -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Person",
+            "@id": "https://gh0st4n.my.id/#person",
+            "name": "Muhammad Luthfi Fakhmar",
+            "alternateName": "Gh0sT4n",
+            "url": "https://gh0st4n.my.id/",
+            "image": "https://certs.gh0st4n.my.id/assets/icons/Gh0sT4n.png",
+            "jobTitle": "Founder T4n-Labs & Vulnerability Researcher",
+            "description": "System developer dan peminat Linux asal Aceh, Indonesia; founder ekosistem T4n Labs.",
+            "address": {
+              "@type": "PostalAddress",
+              "addressRegion": "Aceh",
+              "addressCountry": "ID"
+            },
+            "worksFor": { "@id": "https://t4nos.t4nlabs.web.id/#organization" },
+            "sameAs": [
+              "https://github.com/gh0st4n",
+              "https://gitlab.com/gh0st4n",
+              "https://instagram.com/gh0st4n_",
+              "https://www.linkedin.com/in/m-luthfi-fakhmar/"
+            ]
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://certs.gh0st4n.my.id/#website",
+            "name": "Gh0sT4n Certificates",
+            "url": "https://certs.gh0st4n.my.id/",
+            "inLanguage": "id",
+            "description": "Kumpulan sertifikat dan pelatihan Gh0sT4n yang bisa dilihat dan diverifikasi langsung ke issuer.",
+            "author": { "@id": "https://gh0st4n.my.id/#person" },
+            "publisher": { "@id": "https://gh0st4n.my.id/#person" }
+          },
+          {
+            "@type": "Organization",
+            "@id": "https://t4nos.t4nlabs.web.id/#organization",
+            "name": "T4n Labs",
+            "url": "https://t4nos.t4nlabs.web.id/",
+            "founder": { "@id": "https://gh0st4n.my.id/#person" },
+            "sameAs": [
+              "https://github.com/T4n-Labs",
+              "https://gitlab.com/t4n-labs",
+              "https://www.instagram.com/t4n_labs",
+              "https://discord.gg/yM5s7RWBxq"
+            ]
+          }
+        ]
+      }
+    </script>
 
     <!-- Font & ikon: sama dgn situs utama -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -42,6 +132,8 @@
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono:wght@400;700&display=swap"
       rel="stylesheet" />
+    <!-- SEO/performa: preconnect ke CDN unpkg agar ikon termuat lebih cepat -->
+    <link rel="preconnect" href="https://unpkg.com" crossorigin />
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
     <link rel="stylesheet" href="assets/style.css" />
@@ -71,8 +163,8 @@
     <main>
       <!-- ══════════════════ HERO ══════════════════ -->
       <section class="page-hero">
-        <canvas id="particles-canvas"></canvas>
-        <div class="scanline-overlay"></div>
+        <canvas id="particles-canvas" aria-hidden="true"></canvas>
+        <div class="scanline-overlay" aria-hidden="true"></div>
 
         <div class="hero-content fade-in-up">
           <div class="hero-greeting">&gt; ls ~/certificates --sort=date</div>
@@ -123,6 +215,21 @@
               <p class="empty-note mono">
                 [ JavaScript mati — daftar sertifikat gak bisa dirender ]
               </p>
+              <!-- SEO fallback: konten bermakna utk crawler & pengunjung
+                   non-JS, karena seluruh kartu dirender oleh script.js -->
+              <div style="max-width:720px; margin:2rem auto; padding:1.5rem; border:1px solid #333; border-radius:12px;">
+                <h2>Sertifikat dan Pelatihan Gh0sT4n</h2>
+                <p>
+                  Gh0sT4n (Muhammad Luthfi Fakhmar), founder T4n-Labs,
+                  mengumpulkan sertifikat dan pelatihan yang difokuskan pada
+                  Cyber Security. Setiap dokumen asli dapat dilihat langsung
+                  melalui situs ini dan diverifikasi ke issuer masing-masing.
+                </p>
+                <ul>
+                  <li><a href="https://gh0st4n.my.id">Portofolio utama Gh0sT4n</a></li>
+                  <li><a href="https://blog.gh0st4n.my.id">Blog Gh0sT4n</a></li>
+                </ul>
+              </div>
             </noscript>
           </div>
 
