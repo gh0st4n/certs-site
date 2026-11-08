@@ -98,4 +98,16 @@ const CERTS = [
     view: "assets/certificates/Merdeka-Siber/MS-WBNR1002-2026-078.webp",
     verify: "https://merdekasiber.com/certificate/MS-WBNR1002-2026-078",
   },
+  {
+    type: "webinar",
+    issuer: "merdeka-siber",
+    icon: "ph ph-path",
+    title:
+      "Sharing Session: From Zero IT Knowledge to a Cybersecurity Carrer in Germany",
+    desc: "Certificate of Appreciation atas partisipasi sebagai peserta sharing session Dari Nol Pengetahuan TI hingga Karier Keamanan Siber di Jerman",
+    date: "08 Nov 2026",
+    certId: "MS-WBNR1102-2026-212",
+    view: "assets/certificates/Merdeka-Siber/MS-WBNR1002-2026-078.webp",
+    verify: "https://merdekasiber.com/certificate/MS-WBNR1102-2026-212",
+  },
 ];
